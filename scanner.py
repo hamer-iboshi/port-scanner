@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import socket
 
 #arguments
 arg = sys.argv[1:]
@@ -12,3 +13,5 @@ except:
 
 ip = ip_addr.split('-')[0]
 sock = socket.socket (socket.AF_INET, socket.SOCK_STREAM)
+print(socket.gethostname())
+sock.close()
