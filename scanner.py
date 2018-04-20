@@ -4,7 +4,6 @@ import sys
 import socket
 import select
 
-
 #arguments
 timeout_in_seconds = 1
 arg = sys.argv[1:]
@@ -27,14 +26,18 @@ if len(range_ports)<=1:
 
 print("IP:",prefix_ip+'.',range_ip," Port: ",range_ports)
 for ip in range(int(range_ip[0]),int(range_ip[1])+1):
-	print("--------------------------------------")
+	print('--------------------------------------------')
 	print("IP:",prefix_ip+'.'+str(ip))
+	print('PORT SERVICE | BANNER')
 	for port in range(int(range_ports[0]),int(range_ports[1])+1):  
 		sock = socket.socket (socket.AF_INET, socket.SOCK_STREAM)
 		#sock.setblocking(0)
 		result = sock.connect_ex((prefix_ip+'.'+str(ip),int(port)))
 		if result==0:
-			print('Porta (',port,'): Open')
+			try:
+				print(port,' ',str(socket.getservbyport(port,'tcp')),' | ',end='')
+			except:
+				print(port,' ',' ',' | ',end='')
 			ready = select.select([sock], [], [], timeout_in_seconds)
 			if ready[0]:
 				data = sock.recv(256)
@@ -42,4 +45,4 @@ for ip in range(int(range_ip[0]),int(range_ip[1])+1):
 			else:
 				print("Sem informação")
 		sock.close()
-	print("--------------------------------------\n\n")
+	print('--------------------------------------------\n')
