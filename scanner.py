@@ -24,7 +24,7 @@ range_ports = port_addr.split('-')
 if len(range_ports)<=1:
 	range_ports.append(range_ports[0])
 
-print("IP:",prefix_ip+'.',range_ip," Port: ",range_ports)
+print("IP(s):",prefix_ip+'.',range_ip," Port(s): ",range_ports)
 for ip in range(int(range_ip[0]),int(range_ip[1])+1):
 	print('--------------------------------------------')
 	print("IP:",prefix_ip+'.'+str(ip))
@@ -45,4 +45,4 @@ for ip in range(int(range_ip[0]),int(range_ip[1])+1):
 			else:
 				print("Sem informação")
 		sock.close()
-	print('--------------------------------------------\n')
+	print('--------------------------------------------')
